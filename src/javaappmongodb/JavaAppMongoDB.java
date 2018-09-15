@@ -5,6 +5,12 @@
  */
 package javaappmongodb;
 
+import javaappmongodb.model.dao.DisciplinaDao;
+import javaappmongodb.model.dao.MatriculaPeriodoDao;
+import javaappmongodb.model.dao.NotasDao;
+import javaappmongodb.controle.AlunoControle;
+import javaappmongodb.controle.AlunoControleMapReduce;
+
 /**
  *
  * @author Edvania
@@ -26,14 +32,16 @@ public class JavaAppMongoDB {
         NotasDao notas = new NotasDao(ip, banco, porta);
         MatriculaPeriodoDao matriculaPeriodo = new MatriculaPeriodoDao(ip, banco, porta);
         //notas.imprimir();
-        //aluno.imprimir();
+        aluno.imprimir();
         //disciplina.imprimir();
         //matriculaPeriodo.imprimir();
         //notas.imprimir();
+        /*
         AlunoControleMapReduce alunos = new AlunoControleMapReduce(ip, banco, porta);
         for (String s : alunos.mapReduce()) {
             System.out.println(s);
         }
+        */
     }
     
 }

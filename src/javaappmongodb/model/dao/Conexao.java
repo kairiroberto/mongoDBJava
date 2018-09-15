@@ -1,4 +1,4 @@
-package javaappmongodb;
+package javaappmongodb.model.dao;
 
 import com.mongodb.*;
 import com.mongodb.client.MongoCollection;

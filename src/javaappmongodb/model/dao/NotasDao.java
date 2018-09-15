@@ -1,5 +1,6 @@
-package javaappmongodb;
+package javaappmongodb.model.dao;
 
+import javaappmongodb.model.dao.Notas;
 import java.util.*;
 import com.mongodb.*;
 

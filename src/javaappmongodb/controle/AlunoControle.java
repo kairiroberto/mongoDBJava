@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package javaappmongodb;
+package javaappmongodb.controle;
 
+import javaappmongodb.model.dao.Aluno;
 import java.util.Date;
+import javaappmongodb.model.dao.AlunoDao;
 
 /**
  *
@@ -29,10 +31,11 @@ public class AlunoControle extends AlunoDao {
 		{
 			for (Aluno aluno : getAlunos())
 			{
-				if (aluno.sexo.contains("M"))
-				{
-					masculino++;
-				}
+				if (aluno.getSexo().contains("M"))
+                                {
+                                    masculino++;
+                                } else {
+                                }
 			}
 		}
 		return masculino;
@@ -44,7 +47,7 @@ public class AlunoControle extends AlunoDao {
 		{
 			for (Aluno aluno : getAlunos())
 			{
-				if (aluno.sexo.contains("F"))
+				if (aluno.getSexo().contains("F"))
 				{
 					feminino++;
 				}
@@ -61,7 +64,7 @@ public class AlunoControle extends AlunoDao {
 			int somador = 0;
 			for (Aluno a : getAlunos())
 			{
-				int ano = Integer.parseInt(a.nascimeto.trim().substring(7, 11));
+				int ano = Integer.parseInt(a.getNascimeto().trim().substring(7, 11));
 				somador = somador + (d.getYear() + 1900 - ano);
 			}
 			mediaIdade = somador / getAlunos().size();
@@ -74,11 +77,11 @@ public class AlunoControle extends AlunoDao {
 		if (maxIdade == 0)
 		{
 			Date d = new Date();
-			int ano = Integer.parseInt(getAlunos().get(0).nascimeto.trim().substring(7, 11));
+			int ano = Integer.parseInt(getAlunos().get(0).getNascimeto().trim().substring(7, 11));
 			maxIdade = d.getYear() + 1900 - ano;
 			for (Aluno a : getAlunos())
 			{
-				ano = Integer.parseInt(a.nascimeto.trim().substring(7, 11));
+				ano = Integer.parseInt(a.getNascimeto().trim().substring(7, 11));
 				int idade = d.getYear() + 1900 - ano;
 				if (idade > maxIdade)
 				{
@@ -94,11 +97,11 @@ public class AlunoControle extends AlunoDao {
 		if (minIdade == 0)
 		{
 			Date d = new Date();
-			int ano = Integer.parseInt(getAlunos().get(0).nascimeto.trim().substring(7, 11));
+			int ano = Integer.parseInt(getAlunos().get(0).getNascimeto().trim().substring(7, 11));
 			minIdade = d.getYear() + 1900 - ano;
 			for (Aluno a : getAlunos())
 			{
-				ano = Integer.parseInt(a.nascimeto.trim().substring(7, 11));
+				ano = Integer.parseInt(a.getNascimeto().trim().substring(7, 11));
 				int idade = d.getYear() + 1900 - ano;
 				if (idade < minIdade)
 				{

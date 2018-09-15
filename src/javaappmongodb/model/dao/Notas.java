@@ -1,4 +1,4 @@
-package javaappmongodb;
+package javaappmongodb.model.dao;
 
 public class Notas
 {
