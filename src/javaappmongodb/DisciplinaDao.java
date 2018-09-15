@@ -29,9 +29,9 @@ public class DisciplinaDao extends Conexao {
             while (cursorDisciplina.hasNext()) {
                 String objeto = cursorDisciplina.next().toString();
                 String[] objeto1 = objeto.split(",");
-                String ch = (objeto1[1].trim().split(":"))[1];
-                String descricao = (objeto1[2].trim().split(":"))[1];
-                String id = (objeto1[3].trim().split(":"))[1];
+                String ch = (objeto1[1].trim().replace("}", "").split(":"))[1];
+                String descricao = (objeto1[2].trim().replace("}", "").split(":"))[1];
+                String id = (objeto1[3].trim().replace("}", "").split(":"))[1];
                 Disciplina disciplina = new Disciplina(
                         id, descricao, ch
                 );
