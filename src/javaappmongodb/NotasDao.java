@@ -2,8 +2,6 @@ package javaappmongodb;
 
 import java.util.*;
 import com.mongodb.*;
-import com.mongodb.util.JSON;
-import netscape.javascript.JSObject;
 
 public class NotasDao extends Conexao {
 
@@ -55,26 +53,6 @@ public class NotasDao extends Conexao {
         for (Notas a : getNotas()) {
             System.out.println(a);
         }
-    }
-
-    private Notas instanciarObjeto(String toString) {
-        String objeto = toString;
-        String[] objeto1 = objeto.split(",");
-        String matricula = (objeto1[1].trim().split(":"))[1];
-        String frequencia = (objeto1[2].trim().split(":"))[1];
-        String professor = "";
-        //professor = (objeto1[3].trim().split(":"))[1];
-        String media = "";
-        //media = (objeto1[4].trim().split(":"))[1];
-        String disciplina = "";
-        //disciplina = (objeto1[5].trim().split(":"))[1];
-        String situacao = "";
-        //situacao = (objeto1[6].trim().split(":"))[1];
-        Notas nota = new Notas(
-                matricula, frequencia, professor,
-                media, disciplina, situacao
-        );
-        return nota;
     }
 
 }
