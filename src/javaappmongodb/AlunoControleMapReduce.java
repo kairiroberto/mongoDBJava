@@ -26,17 +26,17 @@ public class AlunoControleMapReduce extends AlunoDao {
         super(ip, banco, porta);
     }
 
-    public List<Aluno> mapReduce() {
-        
-        List<Aluno> aluno = new ArrayList<Aluno>();
+    public List<String> mapReduce() {
+        colecaoAluno = getDb().getCollection("notas");
+        List<String> alunos = new ArrayList<String>();
         String map
                 = "function() { "
-                    + "var category; "
-                    + "if ( this.pages >= 250 ) "
-                        + "category = 'Big Books'; "
+                    + "var situacao; "
+                    + "if ( this.media_final >= 60 ) "
+                        + "situacao = 'aprovado'; "
                     + "else "
-                        + "category = 'Small Books'; "
-                    + "emit(category, {name: this.name});}";
+                        + "situacao = 'reprovado'; "
+                    + "emit(situacao, {name: this.matricula_periodo_id});}";
 
         String reduce
                 = "function(key, values) { "
@@ -44,17 +44,16 @@ public class AlunoControleMapReduce extends AlunoDao {
                     + "values.forEach(function(doc) { "
                         + "sum += 1; "
                     + "}); "
-                    + "return {books: sum};} ";
-
-        colecaoAluno = getDb().getCollection("Aluno");
-        MapReduceCommand cmd = new MapReduceCommand(
+                    + "return {resultado: sum};} ";
+        MapReduceCommand cmd1 = new MapReduceCommand(
                 colecaoAluno, map, reduce, null, MapReduceCommand.OutputType.INLINE, null
         );
+        MapReduceCommand cmd = new MapReduceCommand(colecaoAluno, reduce, reduce, reduce, MapReduceCommand.OutputType.MERGE, null);
         MapReduceOutput out = colecaoAluno.mapReduce(cmd);
         for (DBObject o : out.results()) {
-            System.out.println(o.toString());
+            alunos.add(o.toString());
         }
-        return null;
+        return alunos;
     }
 
 }
