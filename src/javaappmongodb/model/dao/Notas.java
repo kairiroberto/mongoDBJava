@@ -3,12 +3,12 @@ package javaappmongodb.model.dao;
 public class Notas
 {
 	
-	String matricula;
-	String frequencia;
-	String professores;
-	String media;
-	String disciplina;
-	String situacao;
+	private String matricula;
+	private String frequencia;
+	private String professores;
+	private String media;
+	private String disciplina;
+	private String situacao;
 
 	public Notas(String matricula, String frequencia, String professores, String media, String disciplina, String situacao)
 	{
@@ -35,5 +35,53 @@ public class Notas
 		//return super.toString();
 		return retorno;
 	}
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
+    public String getFrequencia() {
+        return frequencia;
+    }
+
+    public void setFrequencia(String frequencia) {
+        this.frequencia = frequencia;
+    }
+
+    public String getProfessores() {
+        return professores;
+    }
+
+    public void setProfessores(String professores) {
+        this.professores = professores;
+    }
+
+    public String getMedia() {
+        return media;
+    }
+
+    public void setMedia(String media) {
+        this.media = media;
+    }
+
+    public String getDisciplina() {
+        return disciplina;
+    }
+
+    public void setDisciplina(String disciplina) {
+        this.disciplina = disciplina;
+    }
+
+    public String getSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
+    }
 	
 }
