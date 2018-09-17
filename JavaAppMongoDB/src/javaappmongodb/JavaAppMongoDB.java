@@ -24,24 +24,7 @@ public class JavaAppMongoDB {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        String ip = "localhost";
-        String porta = "27017";
-        String banco = "dados_ifrn";
-        AlunoControle aluno = new AlunoControle(ip, banco, porta);
-        DisciplinaDao disciplina = new DisciplinaDao(ip, banco, porta);
-        NotasDao notas = new NotasDao(ip, banco, porta);
-        MatriculaPeriodoDao matriculaPeriodo = new MatriculaPeriodoDao(ip, banco, porta);
-        //notas.imprimir();
-        aluno.imprimir();
-        //disciplina.imprimir();
-        //matriculaPeriodo.imprimir();
-        //notas.imprimir();
-        /*
-        AlunoControleMapReduce alunos = new AlunoControleMapReduce(ip, banco, porta);
-        for (String s : alunos.mapReduce()) {
-            System.out.println(s);
-        }
-        */
+        new JFPrincipal().setVisible(true);
     }
     
 }
