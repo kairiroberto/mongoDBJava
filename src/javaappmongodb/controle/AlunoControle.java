@@ -64,7 +64,7 @@ public class AlunoControle extends AlunoDao {
 			int somador = 0;
 			for (Aluno a : getAlunos())
 			{
-				int ano = Integer.parseInt(a.getNascimeto().trim().substring(7, 11));
+				int ano = Integer.parseInt(a.getNascimento().trim().substring(7, 11));
 				somador = somador + (d.getYear() + 1900 - ano);
 			}
 			mediaIdade = somador / getAlunos().size();
@@ -77,11 +77,11 @@ public class AlunoControle extends AlunoDao {
 		if (maxIdade == 0)
 		{
 			Date d = new Date();
-			int ano = Integer.parseInt(getAlunos().get(0).getNascimeto().trim().substring(7, 11));
+			int ano = Integer.parseInt(getAlunos().get(0).getNascimento().trim().substring(7, 11));
 			maxIdade = d.getYear() + 1900 - ano;
 			for (Aluno a : getAlunos())
 			{
-				ano = Integer.parseInt(a.getNascimeto().trim().substring(7, 11));
+				ano = Integer.parseInt(a.getNascimento().trim().substring(7, 11));
 				int idade = d.getYear() + 1900 - ano;
 				if (idade > maxIdade)
 				{
@@ -97,11 +97,11 @@ public class AlunoControle extends AlunoDao {
 		if (minIdade == 0)
 		{
 			Date d = new Date();
-			int ano = Integer.parseInt(getAlunos().get(0).getNascimeto().trim().substring(7, 11));
+			int ano = Integer.parseInt(getAlunos().get(0).getNascimento().trim().substring(7, 11));
 			minIdade = d.getYear() + 1900 - ano;
 			for (Aluno a : getAlunos())
 			{
-				ano = Integer.parseInt(a.getNascimeto().trim().substring(7, 11));
+				ano = Integer.parseInt(a.getNascimento().trim().substring(7, 11));
 				int idade = d.getYear() + 1900 - ano;
 				if (idade < minIdade)
 				{

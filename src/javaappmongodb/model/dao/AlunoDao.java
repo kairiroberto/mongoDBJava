@@ -6,6 +6,7 @@ import com.mongodb.*;
 
 public class AlunoDao extends Conexao {
 
+    private Aluno aluno;
     private List<Aluno> alunos = new ArrayList<Aluno>();
     private DBCollection colecaoAluno;
     private DBCursor cursorAluno;
@@ -59,13 +60,22 @@ public class AlunoDao extends Conexao {
         return alunos;
     }
 
+    public Aluno getAluno(String id) {
+        for (Aluno a : getAlunos()) {
+            if (a.getId().equals(id)) {
+                return a;
+            }
+        }
+        return null;
+    }
+
     public Map<String, Integer> getCidades() {
         if (cidades.size() == 0) {
             for (Aluno aluno : getAlunos()) {
-                if (!cidades.containsKey(aluno.cidade)) {
-                    cidades.put(aluno.cidade, 1);
+                if (!cidades.containsKey(aluno.getCidade())) {
+                    cidades.put(aluno.getCidade(), 1);
                 } else {
-                    cidades.put(aluno.cidade, cidades.get(aluno.cidade) + 1);
+                    cidades.put(aluno.getCidade(), cidades.get(aluno.getCidade()) + 1);
                 }
             }
         }
@@ -76,12 +86,12 @@ public class AlunoDao extends Conexao {
         if (mediaIdadeCidade.size() == 0) {
             Date d = new Date();
             for (Aluno a : getAlunos()) {
-                Double idade = d.getYear() + 1900 - Double.parseDouble(a.nascimeto.trim().substring(7, 11));
-                if (!mediaIdadeCidade.containsKey(a.cidade)) {
-                    mediaIdadeCidade.put(a.cidade, idade);
+                Double idade = d.getYear() + 1900 - Double.parseDouble(a.getNascimento().trim().substring(7, 11));
+                if (!mediaIdadeCidade.containsKey(a.getCidade())) {
+                    mediaIdadeCidade.put(a.getCidade(), idade);
                 } else {
-                    Double somador = mediaIdadeCidade.get(a.cidade) + idade;
-                    mediaIdadeCidade.put(a.cidade, somador);
+                    Double somador = mediaIdadeCidade.get(a.getCidade()) + idade;
+                    mediaIdadeCidade.put(a.getCidade(), somador);
                 }
             }
             for (String key : mediaIdadeCidade.keySet()) {
@@ -96,12 +106,12 @@ public class AlunoDao extends Conexao {
         if (maxIdadeCidade.size() == 0) {
             Date d = new Date();
             for (Aluno a : getAlunos()) {
-                Integer idade = d.getYear() + 1900 - Integer.parseInt(a.nascimeto.trim().substring(7, 11));
-                if (!maxIdadeCidade.containsKey(a.cidade)) {
-                    maxIdadeCidade.put(a.cidade, idade);
+                Integer idade = d.getYear() + 1900 - Integer.parseInt(a.getNascimento().trim().substring(7, 11));
+                if (!maxIdadeCidade.containsKey(a.getCidade())) {
+                    maxIdadeCidade.put(a.getCidade(), idade);
                 } else {
-                    if (idade > maxIdadeCidade.get(a.cidade)) {
-                        maxIdadeCidade.put(a.cidade, idade);
+                    if (idade > maxIdadeCidade.get(a.getCidade())) {
+                        maxIdadeCidade.put(a.getCidade(), idade);
                     }
                 }
             }
@@ -113,12 +123,12 @@ public class AlunoDao extends Conexao {
         if (minIdadeCidade.size() == 0) {
             Date d = new Date();
             for (Aluno a : getAlunos()) {
-                Integer idade = d.getYear() + 1900 - Integer.parseInt(a.nascimeto.trim().substring(7, 11));
-                if (!minIdadeCidade.containsKey(a.cidade)) {
-                    minIdadeCidade.put(a.cidade, idade);
+                Integer idade = d.getYear() + 1900 - Integer.parseInt(a.getNascimento().trim().substring(7, 11));
+                if (!minIdadeCidade.containsKey(a.getCidade())) {
+                    minIdadeCidade.put(a.getCidade(), idade);
                 } else {
-                    if (idade < minIdadeCidade.get(a.cidade)) {
-                        minIdadeCidade.put(a.cidade, idade);
+                    if (idade < minIdadeCidade.get(a.getCidade())) {
+                        minIdadeCidade.put(a.getCidade(), idade);
                     }
                 }
             }

@@ -2,19 +2,19 @@ package javaappmongodb.model.dao;
 
 public class Aluno
 {
-	String id;
-	String curso;
-	String anoLetivo;
-	String periodo;
-	String situacao;
-	String cidade;
-	String estado;
-	String cep;
-	String nascimeto;
-	String sexo;
-	Integer idade;
+	private String id;
+	private String curso;
+	private String anoLetivo;
+	private String periodo;
+	private String situacao;
+	private String cidade;
+	private String estado;
+	private String cep;
+	private String nascimento;
+	private String sexo;
+	private Integer idade;
 
-	public Aluno(String id, String curso, String anoLetivo, String periodo, String situacao, String cidade, String estado, String cep, String nascimeto, String sexo, Integer idade)
+	public Aluno(String id, String curso, String anoLetivo, String periodo, String situacao, String cidade, String estado, String cep, String nascimento, String sexo, Integer idade)
 	{
 		this.id = id;
 		this.curso = curso;
@@ -24,7 +24,7 @@ public class Aluno
 		this.cidade = cidade;
 		this.estado = estado;
 		this.cep = cep;
-		this.nascimeto = nascimeto;
+		this.nascimento = nascimento;
 		this.sexo = sexo;
 		this.idade = idade;
 	}
@@ -42,7 +42,7 @@ public class Aluno
 			", cidade= " + cidade +
 			", estado= " + estado +
 			", cep= " + cep +
-			", data= " + nascimeto +
+			", data= " + nascimento +
 			", sexo= " + sexo +
                         ", idade= " + idade
 		;
@@ -114,12 +114,12 @@ public class Aluno
         this.cep = cep;
     }
 
-    public String getNascimeto() {
-        return nascimeto;
+    public String getNascimento() {
+        return nascimento;
     }
 
-    public void setNascimeto(String nascimeto) {
-        this.nascimeto = nascimeto;
+    public void setNascimeto(String nascimento) {
+        this.nascimento = nascimento;
     }
 
     public String getSexo() {

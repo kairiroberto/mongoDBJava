@@ -7,35 +7,37 @@ package javaappmongodb;
 
 import java.util.ArrayList;
 import java.util.List;
-import javaappmongodb.controle.AlunoControle;
-import javaappmongodb.model.dao.Aluno;
+import javaappmongodb.controle.SituacaoMatriculaPeriodoControle;
+import javaappmongodb.model.dao.SituacaoMatriculaPeriodo;
 import javax.swing.table.AbstractTableModel;
 
 /**
  *
  * @author Edvania
  */
-public class JFAluno extends javax.swing.JFrame {
+public class JFSituacaoMatriculaPeriodo extends javax.swing.JFrame {
 
+    private SituacaoMatriculaPeriodoControle controle;
+    private List<SituacaoMatriculaPeriodo> situacaoMatriculaPeriodos = new ArrayList<SituacaoMatriculaPeriodo>();
+    private AbstractTableModel tableModel = new SituacaoMatriculaPeriodoTableModel();
+    
     /**
-     * Creates new form JFAluno
+     * Creates new form JFSituacaoMatriculaPeriodo
      */
-    private AlunoControle aluno;    
-    private List<Aluno> alunos = new ArrayList<Aluno>();
-    private AlunoTableModel alunoTableModel = new AlunoTableModel();
-    
-    public JFAluno() {
+    public JFSituacaoMatriculaPeriodo() {
         initComponents();
     }
 
-    JFAluno(String ip, String banco, String porta) {
-        aluno = new AlunoControle(ip, banco, porta);
+    JFSituacaoMatriculaPeriodo(String ip, String banco, String porta) {
+        controle = new SituacaoMatriculaPeriodoControle(ip, banco, porta);
         initComponents();
     }
-    
-    private List<Aluno> getAlunos() {
-        return aluno.getAlunos();
+
+    public List<SituacaoMatriculaPeriodo> getSituacaoMatriculaPeriodos() {
+        return controle.getSituacaoMatriculaPeriodos();
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -49,9 +51,9 @@ public class JFAluno extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(alunoTableModel);
+        jTable1.setModel(tableModel);
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -85,20 +87,20 @@ public class JFAluno extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JFAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFSituacaoMatriculaPeriodo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JFAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFSituacaoMatriculaPeriodo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JFAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFSituacaoMatriculaPeriodo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JFAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFSituacaoMatriculaPeriodo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JFAluno().setVisible(true);
+                new JFSituacaoMatriculaPeriodo().setVisible(true);
             }
         });
     }
@@ -108,45 +110,39 @@ public class JFAluno extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
-    class AlunoTableModel extends AbstractTableModel {
-
-        private String[] columnName = new String[]{
-            "ID","ANO","PERÍODO","CURSO","CIDADE","UF","CEP","DATA","IDADE","SEXO"
-        };
+    class SituacaoMatriculaPeriodoTableModel extends AbstractTableModel {
         
+        private String[] columnName = new String[] {
+                "ID", "SITUAÇÃO"
+                };
+
+        public SituacaoMatriculaPeriodoTableModel() {
+        }
+
         @Override
         public int getRowCount() {
-            return getAlunos().size();
+            return getSituacaoMatriculaPeriodos().size();
         }
 
         @Override
         public int getColumnCount() {
             return columnName.length;
         }
-        
+
         @Override
         public String getColumnName(int column) {
             return columnName[column];
         }
-
+        
         @Override
         public Object getValueAt(int rowIndex, int columnIndex) {
-            Aluno aluno = getAlunos().get(rowIndex);
-            switch(columnIndex){
-                case 0: return aluno.getId();
-                case 1: return aluno.getAnoLetivo();
-                case 2: return aluno.getPeriodo();
-                case 3: return aluno.getCurso();
-                case 4: return aluno.getCidade();
-                case 5: return aluno.getEstado();
-                case 6: return aluno.getCep();
-                case 7: return aluno.getNascimento();
-                case 8: return aluno.getIdade();
-                case 9: return aluno.getSexo();
+            SituacaoMatriculaPeriodo s = getSituacaoMatriculaPeriodos().get(rowIndex);
+            switch(columnIndex) {
+                case 0: return s.getId();
+                case 1: return s.getDescricao();
             }
             return null;
         }
-        
     }
-
+    
 }
