@@ -7,34 +7,33 @@ package javaappmongodb;
 
 import java.util.ArrayList;
 import java.util.List;
-import javaappmongodb.controle.AlunoControle;
-import javaappmongodb.model.dao.Aluno;
+import javaappmongodb.controle.ObjetoHadoopControle;
+import javaappmongodb.model.dao.ObjetoHadoop;
 import javax.swing.table.AbstractTableModel;
 
 /**
  *
  * @author Edvania
  */
-public class JFAluno extends javax.swing.JFrame {
+public class JFObjetoHadoop extends javax.swing.JFrame {
 
+    private ObjetoHadoopControle controle;    
+    private List<ObjetoHadoop> list = new ArrayList<ObjetoHadoop>();
+    private AbstractTableModel objetoHadoopTableModel = new ObjetcoHadoopTableModel();
     /**
-     * Creates new form JFAluno
+     * Creates new form JFObjetoHadoop
      */
-    private AlunoControle aluno;    
-    private List<Aluno> alunos = new ArrayList<Aluno>();
-    private AlunoTableModel alunoTableModel = new AlunoTableModel();
-    
-    public JFAluno() {
+    public JFObjetoHadoop() {
         initComponents();
     }
 
-    JFAluno(String ip, String banco, String porta) {
-        aluno = new AlunoControle(ip, banco, porta);
+    JFObjetoHadoop(String ip, String banco, String porta) {
+        controle = new ObjetoHadoopControle(ip, banco, porta);
         initComponents();
     }
-    
-    private List<Aluno> getAlunos() {
-        return aluno.getAlunos();
+
+    public List<ObjetoHadoop> getList() {
+        return controle.getList();
     }
 
     /**
@@ -51,14 +50,14 @@ public class JFAluno extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTable1.setModel(alunoTableModel);
+        jTable1.setModel(objetoHadoopTableModel);
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,38 +84,36 @@ public class JFAluno extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JFAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFObjetoHadoop.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JFAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFObjetoHadoop.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JFAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFObjetoHadoop.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JFAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFObjetoHadoop.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JFAluno().setVisible(true);
+                new JFObjetoHadoop().setVisible(true);
             }
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    // End of variables declaration//GEN-END:variables
+    class ObjetcoHadoopTableModel extends AbstractTableModel {
 
-    class AlunoTableModel extends AbstractTableModel {
-
-        private String[] columnName = new String[]{
-            "ID","ANO","PERÍODO","CURSO","CIDADE","UF","CEP","DATA","IDADE","SEXO"
+        String[] columnName = new String[]{
+            "anoLetivo", "periodo", "cep", "sexo", "idade", "frequencia", "media", "rotulo"
         };
         
+        public ObjetcoHadoopTableModel() {
+        }
+
         @Override
         public int getRowCount() {
-            return getAlunos().size();
+            return getList().size();
         }
 
         @Override
@@ -131,22 +128,23 @@ public class JFAluno extends javax.swing.JFrame {
 
         @Override
         public Object getValueAt(int rowIndex, int columnIndex) {
-            Aluno aluno = getAlunos().get(rowIndex);
+            ObjetoHadoop o = getList().get(rowIndex);
             switch(columnIndex){
-                case 0: return aluno.getId();
-                case 1: return aluno.getAnoLetivo();
-                case 2: return aluno.getPeriodo();
-                case 3: return aluno.getCurso();
-                case 4: return aluno.getCidade();
-                case 5: return aluno.getEstado();
-                case 6: return aluno.getCep();
-                case 7: return aluno.getNascimento();
-                case 8: return aluno.getIdade();
-                case 9: return aluno.getSexo();
-            }
+                case 0: return o.getAnoLetivo(); 
+                case 1: return o.getPeriodo(); 
+                case 2: return o.getCep(); 
+                case 3: return o.getSexo(); 
+                case 4: return o.getIdade(); 
+                case 5: return o.getFrequencia(); 
+                case 6: return o.getMedia();
+                case 7: return o.getSituacao();
+            }   
             return null;
         }
-        
     }
 
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    // End of variables declaration//GEN-END:variables
 }

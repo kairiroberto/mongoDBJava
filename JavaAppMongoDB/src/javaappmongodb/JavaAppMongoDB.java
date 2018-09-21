@@ -5,6 +5,9 @@
  */
 package javaappmongodb;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javaappmongodb.model.dao.DisciplinaDao;
 import javaappmongodb.model.dao.MatriculaPeriodoDao;
 import javaappmongodb.model.dao.NotasDao;
@@ -23,7 +26,12 @@ public class JavaAppMongoDB {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        try {
+            // TODO code application logic here
+            Process exec = Runtime.getRuntime().exec("C:\\Program Files\\MongoDB\\Server\\3.2\\bin\\mongod.exe --dbpath C:\\data\\db");
+        } catch (IOException ex) {
+            Logger.getLogger(JavaAppMongoDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
         new JFPrincipal().setVisible(true);
     }
     
