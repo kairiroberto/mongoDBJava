@@ -276,27 +276,27 @@ public class JFPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
         // TODO add your handling code here:
-        new JFAlunoGraficoCidadeSexo().setVisible(true);
+        // new JFAlunoGraficoCidadeSexo().setVisible(true);
     }//GEN-LAST:event_jMenuItem15ActionPerformed
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
         // TODO add your handling code here:
-        new JFAlunoGraficoCidadeIdadeMin().setVisible(true);
+        // new JFAlunoGraficoCidadeIdadeMin().setVisible(true);
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
         // TODO add your handling code here:
-        new JFAlunoGraficoCidadeIdadeMax().setVisible(true);
+        // new JFAlunoGraficoCidadeIdadeMax().setVisible(true);
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
         // TODO add your handling code here:
-        new JFAlunoGraficoCidadeIdade().setVisible(true);
+        // new JFAlunoGraficoCidadeIdade().setVisible(true);
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         // TODO add your handling code here:
-        new JFAlunoGraficoCidadeQtd().setVisible(true);
+        // new JFAlunoGraficoCidadeQtd().setVisible(true);
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
