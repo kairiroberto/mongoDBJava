@@ -12,7 +12,6 @@ import javaappmongodb.model.dao.DisciplinaDao;
 import javaappmongodb.model.dao.MatriculaPeriodoDao;
 import javaappmongodb.model.dao.NotasDao;
 import javaappmongodb.controle.AlunoControle;
-import javaappmongodb.controle.AlunoControleMapReduce;
 
 /**
  *
