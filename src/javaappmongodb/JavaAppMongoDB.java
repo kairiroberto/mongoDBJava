@@ -28,11 +28,11 @@ public class JavaAppMongoDB {
     public static void main(String[] args) {
         try {
             // TODO code application logic here
-            Process exec = Runtime.getRuntime().exec("C:\\Program Files\\MongoDB\\Server\\3.2\\bin\\mongod.exe --dbpath C:\\data\\db");
-        } catch (IOException ex) {
+            //Process exec = Runtime.getRuntime().exec("C:\\Program Files\\MongoDB\\Server\\3.2\\bin\\mongod.exe --dbpath C:\\data\\db");
+            new JFPrincipal().setVisible(true);
+        } catch (Exception ex) {
             Logger.getLogger(JavaAppMongoDB.class.getName()).log(Level.SEVERE, null, ex);
         }
-        new JFPrincipal().setVisible(true);
     }
     
 }

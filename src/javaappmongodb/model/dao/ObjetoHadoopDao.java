@@ -78,6 +78,7 @@ public class ObjetoHadoopDao extends Conexao {
                 }
 
                 String situacaoDescricao = null;
+
                 if (dbo.get("situacao_id") != null) {
                     String situacao = String.valueOf(dbo.get("situacao_id"));
                     BasicDBObject query1 = new BasicDBObject();
@@ -88,9 +89,9 @@ public class ObjetoHadoopDao extends Conexao {
 
                 if (dbo.get("matricula_periodo_id") != null) {
                     String matricula_periodo = String.valueOf(dbo.get("matricula_periodo_id"));
-                    BasicDBObject query1 = new BasicDBObject();
-                    query1.put("id", matricula_periodo);
-                    DBCursor results1 = getDb().getCollection("MatriculaPeriodo").find(query1);
+                    BasicDBObject query2 = new BasicDBObject();
+                    query2.put("id", Double.parseDouble(matricula_periodo));
+                    DBCursor results1 = getDb().getCollection("MatriculaPeriodo").find(query2);
 
                     String aluno_id = null;
                     Float anoLetivo = null;
@@ -98,27 +99,25 @@ public class ObjetoHadoopDao extends Conexao {
                     Float cep = null;
                     Float sexo = null;
                     Float idade = null;
-                    if (results1.hasNext()) {
-                        aluno_id = String.valueOf(results1.one().get("aluno_id"));
-                        BasicDBObject query2 = new BasicDBObject();
-                        query2.put("id", aluno_id);
-                        DBCursor results2 = getDb().getCollection("Aluno").find(query2);
-                        if (results2.hasNext()) {
-                            anoLetivo = Float.parseFloat(String.valueOf(results2.one().get("ano_letivo__ano")));
-                            periodo = Float.parseFloat(String.valueOf(results2.one().get("periodo_letivo")));
-                            cep = Float.parseFloat(String.valueOf(results2.one().get("cep")).substring(0, 5));
-                            sexo = Float.parseFloat("0");
-                            if (String.valueOf(results2.one().get("pessoa_fisica__sexo")).equals("M")) {
-                                sexo = Float.parseFloat("1");
-                            } else if (String.valueOf(results2.one().get("pessoa_fisica__sexo")).equals("F")) {
-                                sexo = Float.parseFloat("2");
-                            }
-                            idade = Float.parseFloat(String.valueOf(results2.one().get("pessoa_fisica__nascimento_data")).substring(6));
-                        }
-                    }
 
-                    //ObjetoHadoop hadoop = new ObjetoHadoop(anoLetivo, periodo, cep, sexo, idade, frequencia, media, situacao);
-                    ObjetoHadoop hadoop = new ObjetoHadoop(null, null, null, null, null, frequencia, media, situacaoDescricao);
+                    aluno_id = String.valueOf(results1.one().get("aluno_id"));
+                    BasicDBObject query3 = new BasicDBObject();
+                    query3.put("id", Double.parseDouble(aluno_id));
+                    DBCursor results2 = getDb().getCollection("Aluno").find(query3);
+
+                    anoLetivo = Float.parseFloat(String.valueOf(results2.one().get("ano_letivo__ano")));
+                    periodo = Float.parseFloat(String.valueOf(results2.one().get("periodo_letivo")));
+                    //cep = Float.parseFloat(String.valueOf(results2.one().get("cep")).replace("-", ""));
+                    sexo = Float.parseFloat("0");
+                    if (String.valueOf(results2.one().get("pessoa_fisica__sexo")).equals("M")) {
+                        sexo = Float.parseFloat("1");
+                    } else if (String.valueOf(results2.one().get("pessoa_fisica__sexo")).equals("F")) {
+                        sexo = Float.parseFloat("2");
+                    }
+                    idade = Float.parseFloat(String.valueOf(results2.one().get("pessoa_fisica__nascimento_data")).substring(6));
+
+                    ObjetoHadoop hadoop = new ObjetoHadoop(anoLetivo, periodo, cep, sexo, idade, frequencia, media, situacaoDescricao);
+                    //ObjetoHadoop hadoop = new ObjetoHadoop(null, null, null, null, null, frequencia, media, situacaoDescricao);
                     list.add(hadoop);
                 }
             }
