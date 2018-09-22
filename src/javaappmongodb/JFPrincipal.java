@@ -15,6 +15,7 @@ import javaappmongodb.model.dao.NotasDao;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
 /**
@@ -29,6 +30,7 @@ public class JFPrincipal extends javax.swing.JFrame {
     private final String ip = "localhost";
     private final String porta = "27017";
     private final String banco = "dados_ifrn";
+    AlunoControle controle = new AlunoControle(ip, banco, porta);
 
     public JFPrincipal() {
         initComponents();
@@ -299,13 +301,17 @@ public class JFPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
         // TODO add your handling code here:
-        new JFAlunoGraficoIdade().setVisible(true);
+        // new JFAlunoGraficoIdade().setVisible(true);
+        DefaultPieDataset data = new DefaultPieDataset();
+        data.setValue("Idade Máxima: " + controle.getMaxIdade(), controle.getMaxIdade());
+        data.setValue("Idade Mínima: " + controle.getMinIdade(), controle.getMinIdade());
+        data.setValue("Media de Idade: " + controle.getMediaIdade(), controle.getMediaIdade());
+        criarGrafico(data);
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         // TODO add your handling code here:
         // new JFAlunoGraficoSexo().setVisible(true);
-        AlunoControle controle = new AlunoControle(ip, banco, porta);
         DefaultPieDataset data = new DefaultPieDataset();
         data.setValue("Masculino: " + controle.getMasculino(), controle.getMasculino());
         data.setValue("Feminino: " + controle.getFeminino(), controle.getFeminino());
