@@ -15,6 +15,7 @@ import javaappmongodb.model.dao.NotasDao;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
@@ -282,30 +283,51 @@ public class JFPrincipal extends javax.swing.JFrame {
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
         // TODO add your handling code here:
         // new JFAlunoGraficoCidadeIdadeMin().setVisible(true);
+        DefaultPieDataset data = new DefaultPieDataset();
+        for (String s : controle.getMinIdadeCidade().keySet()) {
+            data.setValue(s + ": " + controle.getMinIdadeCidade().get(s), controle.getMinIdadeCidade().get(s));
+        }
+        criarGrafico(data);
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
         // TODO add your handling code here:
         // new JFAlunoGraficoCidadeIdadeMax().setVisible(true);
+        DefaultPieDataset data = new DefaultPieDataset();
+        for (String s : controle.getMaxIdadeCidade().keySet()) {
+            data.setValue(s + ": " + controle.getMaxIdadeCidade().get(s), controle.getMaxIdadeCidade().get(s));
+        }
+        criarGrafico(data);
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
         // TODO add your handling code here:
         // new JFAlunoGraficoCidadeIdade().setVisible(true);
+        DefaultPieDataset data = new DefaultPieDataset();
+        for (String s : controle.getMediaIdadeCidade().keySet()) {
+            data.setValue(s + ": " + controle.getMediaIdadeCidade().get(s), controle.getMediaIdadeCidade().get(s));
+        }
+        criarGrafico(data);
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         // TODO add your handling code here:
         // new JFAlunoGraficoCidadeQtd().setVisible(true);
+        DefaultPieDataset data = new DefaultPieDataset();
+        for (String s : controle.getCidades().keySet()) {
+            data.setValue(s + ": " + controle.getCidades().get(s), controle.getCidades().get(s));
+        }
+        criarGrafico(data);
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
         // TODO add your handling code here:
         // new JFAlunoGraficoIdade().setVisible(true);
-        DefaultPieDataset data = new DefaultPieDataset();
-        data.setValue("Idade Máxima: " + controle.getMaxIdade(), controle.getMaxIdade());
-        data.setValue("Idade Mínima: " + controle.getMinIdade(), controle.getMinIdade());
-        data.setValue("Media de Idade: " + controle.getMediaIdade(), controle.getMediaIdade());
+        DefaultCategoryDataset data = new DefaultCategoryDataset();
+        data.addValue(controle.getMaxIdade(), "Idade Máxima: " + controle.getMaxIdade(), "");
+        data.addValue(controle.getMinIdade(), "Idade Mínima: " + controle.getMinIdade(), "");
+        data.addValue((controle.getMaxIdade() - controle.getMinIdade()), "Diferença de Idade", "");
+        data.addValue(controle.getMediaIdade(), "Idade Média: " + controle.getMediaIdade(), "");
         criarGrafico(data);
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
@@ -318,18 +340,6 @@ public class JFPrincipal extends javax.swing.JFrame {
         criarGrafico(data);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
-    private void criarGrafico(DefaultPieDataset data) {
-        JFreeChart chart = ChartFactory.createPieChart(
-                "Sample Pie Chart",
-                data,
-                true, // legend?
-                true, // tooltips?
-                true // URLs?
-        );
-        ChartFrame frame = new ChartFrame("Sexo", chart);
-        frame.pack();
-        frame.setVisible(true);
-    }
     
     /**
      * @param args the command line arguments
@@ -391,4 +401,31 @@ public class JFPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
+
+    private void criarGrafico(DefaultCategoryDataset data) {
+        JFreeChart chart = ChartFactory.createBarChart(
+            "",           
+            "",            
+            "",            
+            data,          
+            PlotOrientation.VERTICAL,           
+            true, true, true
+        );
+        ChartFrame frame = new ChartFrame("Idade", chart);
+        frame.pack();
+        frame.setVisible(true);
+    }
+    
+    private void criarGrafico(DefaultPieDataset data) {
+        JFreeChart chart = ChartFactory.createPieChart(
+                "Sample Pie Chart",
+                data,
+                true, // legend?
+                true, // tooltips?
+                true // URLs?
+        );
+        ChartFrame frame = new ChartFrame("Sexo", chart);
+        frame.pack();
+        frame.setVisible(true);
+    }
 }
