@@ -278,6 +278,11 @@ public class JFPrincipal extends javax.swing.JFrame {
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
         // TODO add your handling code here:
         // new JFAlunoGraficoCidadeSexo().setVisible(true);
+        DefaultPieDataset data = new DefaultPieDataset();
+        for (String s : controle.getSexoCidade().keySet()) {
+            data.setValue(s + ": " + controle.getSexoCidade().get(s), controle.getSexoCidade().get(s));
+        }
+        criarGrafico(data);
     }//GEN-LAST:event_jMenuItem15ActionPerformed
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed

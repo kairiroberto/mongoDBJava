@@ -28,99 +28,81 @@ public class AlunoControle extends AlunoDao {
     private Map<String, Double> mediaIdadeCidade = new HashMap<String, Double>();
     private Map<String, Integer> maxIdadeCidade = new HashMap<String, Integer>();
     private Map<String, Integer> minIdadeCidade = new HashMap<String, Integer>();
+    private Map<String, Integer> sexoCidade = new HashMap<String, Integer>();
 
     public AlunoControle(String ip, String banco, String porta) {
         super(ip, banco, porta);
     }
-    
-    public int getMasculino()
-	{
-		if (masculino == 0)
-		{
-			for (Aluno aluno : getAlunos())
-			{
-				if (aluno.getSexo().contains("M"))
-                                {
-                                    masculino++;
-                                } else {
-                                }
-			}
-		}
-		return masculino;
-	}
 
-	public int getFeminino()
-	{
-		if (feminino == 0)
-		{
-			for (Aluno aluno : getAlunos())
-			{
-				if (aluno.getSexo().contains("F"))
-				{
-					feminino++;
-				}
-			}
-		}
-		return feminino;
-	}
+    public int getMasculino() {
+        if (masculino == 0) {
+            for (Aluno aluno : getAlunos()) {
+                if (aluno.getSexo().contains("M")) {
+                    masculino++;
+                } else {
+                }
+            }
+        }
+        return masculino;
+    }
 
-	public double getMediaIdade()
-	{
-		if (mediaIdade == 0.0)
-		{
-			Date d = new Date();
-			int somador = 0;
-			for (Aluno a : getAlunos())
-			{
-				int ano = Integer.parseInt(a.getNascimento().trim().substring(7, 11));
-				somador = somador + (d.getYear() + 1900 - ano);
-			}
-			mediaIdade = somador / getAlunos().size();
-		}
-		return mediaIdade;
-	}
+    public int getFeminino() {
+        if (feminino == 0) {
+            for (Aluno aluno : getAlunos()) {
+                if (aluno.getSexo().contains("F")) {
+                    feminino++;
+                }
+            }
+        }
+        return feminino;
+    }
 
-	public int getMaxIdade()
-	{
-		if (maxIdade == 0)
-		{
-			Date d = new Date();
-			int ano = Integer.parseInt(getAlunos().get(0).getNascimento().trim().substring(7, 11));
-			maxIdade = d.getYear() + 1900 - ano;
-			for (Aluno a : getAlunos())
-			{
-				ano = Integer.parseInt(a.getNascimento().trim().substring(7, 11));
-				int idade = d.getYear() + 1900 - ano;
-				if (idade > maxIdade)
-				{
-					maxIdade = idade;
-				}
-			}
-		}
-		return maxIdade;
-	}
+    public double getMediaIdade() {
+        if (mediaIdade == 0.0) {
+            Date d = new Date();
+            int somador = 0;
+            for (Aluno a : getAlunos()) {
+                int ano = Integer.parseInt(a.getNascimento().trim().substring(7, 11));
+                somador = somador + (d.getYear() + 1900 - ano);
+            }
+            mediaIdade = somador / getAlunos().size();
+        }
+        return mediaIdade;
+    }
 
-	public int getMinIdade()
-	{
-		if (minIdade == 0)
-		{
-			Date d = new Date();
-			int ano = Integer.parseInt(getAlunos().get(0).getNascimento().trim().substring(7, 11));
-			minIdade = d.getYear() + 1900 - ano;
-			for (Aluno a : getAlunos())
-			{
-				ano = Integer.parseInt(a.getNascimento().trim().substring(7, 11));
-				int idade = d.getYear() + 1900 - ano;
-				if (idade < minIdade)
-				{
-					minIdade = idade;
-				}
-			}
-		}
-		return minIdade;
-	}
-        
-        public Map<String, Integer> getCidades() {
+    public int getMaxIdade() {
+        if (maxIdade == 0) {
+            Date d = new Date();
+            int ano = Integer.parseInt(getAlunos().get(0).getNascimento().trim().substring(7, 11));
+            maxIdade = d.getYear() + 1900 - ano;
+            for (Aluno a : getAlunos()) {
+                ano = Integer.parseInt(a.getNascimento().trim().substring(7, 11));
+                int idade = d.getYear() + 1900 - ano;
+                if (idade > maxIdade) {
+                    maxIdade = idade;
+                }
+            }
+        }
+        return maxIdade;
+    }
+
+    public int getMinIdade() {
+        if (minIdade == 0) {
+            Date d = new Date();
+            int ano = Integer.parseInt(getAlunos().get(0).getNascimento().trim().substring(7, 11));
+            minIdade = d.getYear() + 1900 - ano;
+            for (Aluno a : getAlunos()) {
+                ano = Integer.parseInt(a.getNascimento().trim().substring(7, 11));
+                int idade = d.getYear() + 1900 - ano;
+                if (idade < minIdade) {
+                    minIdade = idade;
+                }
+            }
+        }
+        return minIdade;
+    }
+
+    public Map<String, Integer> getCidades() {
         if (cidades.size() == 0) {
             for (Aluno aluno : getAlunos()) {
                 if (!cidades.containsKey(aluno.getCidade())) {
@@ -185,6 +167,33 @@ public class AlunoControle extends AlunoDao {
             }
         }
         return minIdadeCidade;
+    }
+
+    public Map<String, Integer> getSexoCidade() {
+        if (sexoCidade.size() == 0) {
+            for (Aluno a : getAlunos()) {
+                if (a.getSexo().equals("\"M\"")) {
+                    if (!sexoCidade.containsKey(a.getCidade() + "-Masculino")) {
+                        sexoCidade.put(a.getCidade() + "-Masculino", 1);
+                    } else {
+                        sexoCidade.put(a.getCidade() + "-Masculino", sexoCidade.get(a.getCidade()) + 1);
+                    }
+                } else if (a.getSexo().equals("\"F\"")) {
+                    if (!sexoCidade.containsKey(a.getCidade() + "-Feminino")) {
+                        sexoCidade.put(a.getCidade() + "-Feminino", 1);
+                    } else {
+                        sexoCidade.put(a.getCidade() + "-Feminino", sexoCidade.get(a.getCidade()) + 1);
+                    }
+                } else {
+                    if (!sexoCidade.containsKey(a.getCidade())) {
+                        sexoCidade.put(a.getCidade(), 1);
+                    } else {
+                        sexoCidade.put(a.getCidade(), sexoCidade.get(a.getCidade()) + 1);
+                    }
+                }
+            }
+        }
+        return sexoCidade;
     }
 
 }
